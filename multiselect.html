@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .hide{
+            display: none;
+        }
+        .show{
+            display: flex;
+        }
+        .group{
+            display: flex;
+            flex-direction: column;
+            width: fit-content;
+        }
+        #MySelect{
+            appearance: none;
+            background-color: transparent;
+            border: 1px solid black;
+            padding: 0.2rem 0.95rem;
+            border-radius: 0.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div tabindex="0" role="group" class="group">
+        <label>Seleziona una materia: </label>
+        <button tabindex="0" aria-haspopup="listbox" id="MySelect" aria-controls="MyControls"
+            aria-expanded="false" aria-owns="MyControls" value="Option 1,Option 3">
+            <div>
+                <div id="listSelected">
+                    <!-- Option 1, Option 3 -->
+                </div>
+                <div id="placeholder">
+                    Seleziona una delle seguenti materie >
+                </div>
+            </div>
+        </button>
+    </div>
+    <div role="listbox" aria-labelledby="MySelect" aria-multiselectable="true" id="MyControls"
+        aria-label="List of options">
+        <div>
+            <div id="optionContainer" class="hide">
+                <!-- <div role="option" tabindex="-1" aria-selected="false" value="%all%">
+                    <span color="denim-blue">
+                        Deselect all
+                    </span>
+                </div>
+                <div role="option" tabindex="-1" id="option-1" aria-selected="false" value="Option 0">
+                    <label><input type="checkbox" aria-checked="false">Option 0</label>
+                </div>
+                <div role="option" tabindex="-1" id="option-2" aria-selected="true" value="Option 1">
+                    <label><input type="checkbox" aria-checked="true" checked>Option 1</label>
+                </div>
+                <div role="option" tabindex="-1" id="option-3" aria-selected="false" value="Option 2">
+                    <label><input type="checkbox" aria-checked="false">Option 2</label>
+                </div>
+                <div role="option" tabindex="-1" id="option-4" aria-selected="true" value="Option 3">
+                    <label><input type="checkbox" aria-checked="true" checked>Option 3</label>
+                </div>
+                <div role="option" tabindex="-1" id="option-5" aria-selected="false" value="Option 4">
+                    <label><input type="checkbox" aria-checked="false">Option 4</label>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <script>
+        let arrayOptions = [{ value: 0, label: "Option 0", checked: false, id: "option-0" },
+        { value: 1, label: "Option 1", checked: false, id: "option-1" },
+        { value: 2, label: "Option 2", checked: false, id: "option-2" },
+        { value: 3, label: "Option 3", checked: false, id: "option-3" }]
+
+        let buttonSelect = document.getElementById("MySelect")
+        
+        buttonSelect.addEventListener("click", () =>{
+            switchButton()
+        })
+
+        function switchButton () {
+            let optionContainer = document.getElementById("optionContainer")
+            if(optionContainer.classList.contains("show")){
+                buttonSelect.setAttribute("aria-expanded", false)
+                optionContainer.setAttribute("class", "hide")
+            }else{
+               
+                buttonSelect.setAttribute("aria-expanded", true)
+                optionContainer.setAttribute("class", "show")
+            }
+        }
+
+        window.addEventListener("keydown", (e) => {
+            if(e.key == "Escape"){
+                switchButton()
+            }
+        })
+
+        let position = document.getElementById("optionContainer")
+        arrayOptions.forEach(option => {
+            let newDiv = document.createElement("div")
+            let newLabel = document.createElement("label")
+            let newInput = document.createElement("input")
+            let newText = document.createTextNode(option.label)
+            newInput.setAttribute("type", "checkbox")
+            newInput.setAttribute("aria-checked", option.checked)
+            option.checked ? newInput.setAttribute("checked", true) : null
+            newLabel.appendChild(newInput)
+            newLabel.appendChild(newText)
+            newInput.addEventListener("click", (e) => {
+
+                let optionFound = arrayOptions.find(element => element.id == e.target.parentNode.parentNode.id)
+                if(optionFound.checked) {
+                    optionFound.checked = false
+                    document.getElementById(optionFound.id).setAttribute("aria-selected", false)
+                    e.target.setAttribute("aria-checked", false)
+                }else {
+                    optionFound.checked = true
+                    document.getElementById(optionFound.id).setAttribute("aria-selected", true)
+                    e.target.setAttribute("aria-checked", true)
+                }
+                updateSelectButton()
+            })
+            newDiv.appendChild(newLabel)
+            newDiv.setAttribute("role", "option")
+            newDiv.setAttribute("tabindex", "-1")
+            newDiv.setAttribute("aria-selected", option.checked)
+            newDiv.setAttribute("id", option.id)
+            newDiv.setAttribute("value", option.label)
+            position.appendChild(newDiv)
+
+        });
+        function updateSelectButton(){
+            let listSelected = document.getElementById("listSelected")
+            listSelected.textContent = ""
+            arrayOptions.forEach(option => {
+                if( option.checked ){
+                    let selectPlaceholder = document.getElementById("placeholder")
+                    selectPlaceholder.textContent = ""
+                    let newTextOption = document.createTextNode(option.label)
+                    listSelected.appendChild(newTextOption)
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>
