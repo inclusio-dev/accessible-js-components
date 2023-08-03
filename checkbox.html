@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="in">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esempio checkbox</title>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+
+        label,
+        input {
+            cursor: pointer;
+        }
+
+        label {
+            display: flex;
+            flex-direction: unset;
+        }
+
+        .checkboxes1 input[type="checkbox"] {
+
+            background: #ffffff;
+            border: solid 1px #8e99ab;
+            height: 16px;
+            left: 0;
+            width: 16px;
+            border-radius: 3px;
+        }
+
+        .checkboxes1 input[type="checkbox"]:checked {
+            accent-color: #58606e;
+        }
+
+        .checkboxes2 input[type="checkbox"] {
+            appearance: none;
+            background: #ffffff;
+            border: solid 1px #8e99ab;
+            height: 16px;
+            left: 0;
+            width: 16px;
+            border-radius: 3px;
+        }
+
+        .checkboxes2 input[type="checkbox"] {
+            appearance: none;
+            background-color: #fff;
+            margin: 0;
+            font: inherit;
+            color: black;
+            width: 1rem;
+            height: 1rem;
+            border: solid 1px #8e99ab;
+            border-radius: 0.15em;
+            transform: translateY(-0.075em);
+            display: grid;
+            place-content: center;
+            margin-right: 1rem;
+        }
+
+        .checkboxes2 input[type="checkbox"]::before {
+            content: "";
+            width: 0.5rem;
+            height: 0.5rem;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1rem 1rem #58606e;
+        }
+
+        .checkboxes2 input[type="checkbox"]:checked::before {
+            transform: scale(1);
+        }
+    </style>
+</head>
+
+<body>
+    <h3 id="author-checkbox-list">Autori</h3>
+
+    <ul class="checkboxes1" role="group" aria-labelledby="author-checkbox-list">
+        <li>
+            <label><input type="checkbox">J. Cameron</label>
+        </li>
+        <li>
+            <label><input type="checkbox">M. Twain</label>
+        </li>
+        <li>
+            <label><input type="checkbox">J. Verne</label>
+        </li>
+        <li>
+            <label><input type="checkbox">W. Shakespeare</label>
+        </li>
+    </ul>
+
+    <ul class="checkboxes2" role="group" aria-labelledby="author-checkbox-list">
+        <li>
+            <label><input type="checkbox">J. Cameron</label>
+        </li>
+        <li>
+            <label><input type="checkbox">M. Twain</label>
+        </li>
+        <li>
+            <label><input type="checkbox">J. Verne</label>
+        </li>
+        <li>
+            <label><input type="checkbox">W. Shakespeare</label>
+        </li>
+    </ul>
+
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esempio dialog</title>
+    <style>
+        .overlay {
+            position: fixed;
+            background: grey;
+            opacity: 0.7;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+        }
+
+        form {
+            margin-bottom: 2rem;
+        }
+
+        .modal {
+            position: absolute;
+            z-index: 2;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 80vh;
+            width: 50vw;
+            background-color: #fff;
+            border-radius: 4px;
+            padding: 1em;
+            overflow: auto;
+        }
+
+        .inputItem {
+            margin-bottom: 16px;
+        }
+
+        .label,
+        .input {
+            display: flex;
+            width: 100%;
+        }
+
+        .label {
+            margin-bottom: 4px;
+        }
+
+        .App {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="App">
+        <h1>Trap Focus Function Example</h1>
+        <button onclick="toggleModal()">Apri modale</button>
+        <div tabIndex="0"></div>
+        <div id="modalContainer" style="display:none;">
+            <div class="overlay"></div>
+            <div id="modal" role="dialog" aria-labelledby="modalTitle" aria-modal="true" class="modal">
+                <h2 id="modalTitle">Inserisci informazioni</h2>
+                <form>
+                    <div class="inputItem">
+                        <label for="name" class="label">
+                            Nome
+                        </label>
+                        <input id="name" type="text" placeholder="Name" class="input" />
+                    </div>
+                    <div class="input-item">
+                        <label htmlFor="surname" class="label">
+                            Cognome
+                        </label>
+                        <input id="surname" type="text" placeholder="Surname" class="input" />
+                    </div>
+                </form>
+                <button onClick="toggleModal()">Chiudi Modale</button>
+            </div>
+        </div>
+        <div tabIndex="0"></div>
+    </div>
+    <script>
+        const trapFocus = (element, prevFocusableElement = document.activeElement) => {
+            const focusableEls = Array.from(
+                element.querySelectorAll(
+                    'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])'
+                )
+            );
+            const firstFocusableEl = focusableEls[0];
+            const lastFocusableEl = focusableEls[focusableEls.length - 1];
+            let currentFocus = null;
+
+            firstFocusableEl.focus();
+            currentFocus = firstFocusableEl;
+
+            const handleFocus = e => {
+                e.preventDefault();
+                // if the focused element "lives" in your modal container then just focus it
+                if (focusableEls.includes(e.target)) {
+                    currentFocus = e.target;
+                } else {
+                    // you're out of the container
+                    // if previously the focused element was the first element then focus the last 
+                    // element - means you were using the shift key
+                    if (currentFocus === firstFocusableEl) {
+                        lastFocusableEl.focus();
+                    } else {
+                        // you previously were focused on the last element so just focus the first one
+                        firstFocusableEl.focus();
+                    }
+                    // update the current focus var
+                    currentFocus = document.activeElement;
+                }
+            };
+
+            document.addEventListener("focus", handleFocus, true);
+
+            return {
+                onClose: () => {
+                    document.removeEventListener("focus", handleFocus, true);
+                    prevFocusableElement.focus();
+                }
+            };
+        };
+
+        const toggleModal = ((e) => {
+            const modal = document.getElementById("modalContainer");
+            if (modal.style.display === "none") {
+                modal.style.display = "block";
+                trapped = trapFocus(modal);
+            } else {
+                modal.style.display = "none";
+                trapped.onClose();
+            }
+        })
+    </script>
+</body>
+
+</html>

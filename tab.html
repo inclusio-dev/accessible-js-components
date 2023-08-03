@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esempio tabs</title>
+    <style>
+        .is-hidden {
+            display: none;
+        }
+
+        button {
+            background-color: transparent;
+            border: solid 2px #ebeff5;
+            padding: 1rem;
+            margin-right: 1rem;
+            /* margin-bottom: -2px; */
+            z-index: 1;
+            position: relative;
+            cursor: pointer;
+        }
+
+        button:hover {
+            border: solid 2px #e4005b;
+        }
+
+        button:focus,
+        div[role="tabpanel"]:focus {
+            outline: 2px solid #e4005b;
+
+        }
+
+        div[role="tabpanel"] {
+            border-top: solid 2px #e4005b;
+            z-index: 2;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tabs">
+        <h3 id="tablist-1">Esempio tab reale</h3>
+
+        <div role="tablist" aria-labelledby="tablist-1">
+            <button id="tab-1" type="button" role="tab" aria-selected="true" aria-controls="tabpanel-1"
+                onclick="handleClick(event)" onfocus="handleKeydown()">
+                Come si accede
+            </button>
+            <button id="tab-2" type="button" role="tab" aria-selected="false" aria-controls="tabpanel-2" tabindex="-1"
+                onclick="handleClick(event)" onfocus="handleKeydown()">
+                Il digitale del tuo libro
+            </button>
+            <button id="tab-3" type="button" role="tab" aria-selected="false" aria-controls="tabpanel-3" tabindex="-1"
+                onclick="handleClick(event)" onfocus="handleKeydown()">
+                Il digitale di materia
+            </button>
+        </div>
+
+        <div id="tabpanel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1" class="tabpanel">
+            <p>prima tabs
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio ad excepturi temporibus saepe quod error
+                provident voluptas alias repellat. Sunt corrupti reiciendis dolorem! Tempore reiciendis enim animi
+                maxime temporibus commodi.
+            </p>
+        </div>
+        <div id="tabpanel-2" role="tabpanel" tabindex="0" aria-labelledby="tab-2" class="tabpanel is-hidden">
+            <p>seconda tabs
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita repudiandae culpa recusandae dolorum
+                molestias. Veniam dolore soluta commodi qui beatae? Temporibus dolorum corrupti minus consequatur
+                molestias sequi autem ipsum aperiam.
+            </p>
+        </div>
+        <div id="tabpanel-3" role="tabpanel" tabindex="0" aria-labelledby="tab-2" class="tabpanel is-hidden">
+            <p>
+                terza tabs
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita repudiandae culpa recusandae dolorum
+                molestias. Veniam dolore soluta commodi qui beatae? Temporibus dolorum corrupti minus consequatur
+                molestias sequi autem ipsum aperiam.
+            </p>
+        </div>
+    </div>
+    <script>
+        function reset() {
+            let allTabs = document.getElementsByClassName("tabpanel")
+            for (let i = 0; i < allTabs.length; i++) {
+                allTabs[i].classList.add("is-hidden")
+            }
+        }
+        function handleClick(event) {
+            let elem = event.target.getAttribute("aria-controls")
+            updateTab(elem)
+        }
+        function updateTab(elem) {
+            reset()
+            document.getElementById(elem).classList.remove("is-hidden")
+        }
+        function handleKeydown() {
+            document.addEventListener('keydown', function (e) {
+                let code = e.which || e.keyCode;
+                let elem = parseInt(e.target.id.split("-")[1])
+                if (code == '37') {
+                    let leftElem = document.getElementById("tab-" + (elem - 1))
+                    if (leftElem) {
+                        leftElem.focus()
+                        updateTab(leftElem.getAttribute("aria-controls"))
+                    }
+                }
+                else if (code == '39') {
+                    let rightElem = document.getElementById("tab-" + (elem + 1))
+                    if (rightElem) {
+                        rightElem.focus()
+                        updateTab(rightElem.getAttribute("aria-controls"))
+                    }
+                }
+            })
+        }
+
+    </script>
+</body>
+
+</html>

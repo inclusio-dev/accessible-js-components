@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esempio alert</title>
+    <style>
+        .alert {
+            position: relative;
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid transparent;
+            border-radius: 0.25rem;
+            color: #856404;
+            background-color: #fff3cd;
+            border-color: #ffeeba;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .alert > button {
+            appearance: none;
+            background-color: transparent;
+            border: 0;
+            font-size: 1.5rem;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .show {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+    <script>
+        function triggerAlert() {
+
+            let alert = document.getElementsByClassName("alert")[0]
+            if (alert.classList.contains("hide")) {
+                alert.classList.remove("hide")
+                alert.classList.add("show")
+            } else {
+                alert.classList.remove("show")
+                alert.classList.add("hide")
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <button type="button" onclick="setTimeout(() => triggerAlert(), 1000);">Avvia alert</button>
+
+    <div class="alert hide" role="alert">
+
+        <span>Attenzione! Questo è il testo dell'alert</span>
+
+        <button class="close-button" onclick="triggerAlert()" aria-label="Chiudi alert">&times;</button>
+    </div>
+</body>
+
+</html>

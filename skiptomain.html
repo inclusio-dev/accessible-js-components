@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esempio Salta al contenuto</title>
+    <style>
+        a.skip-main {
+            left: -999px;
+            position: absolute;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            z-index: -999;
+        }
+
+        a.skip-main:focus,
+        a.skip-main:active {
+            background: white;
+            color: #000;
+            left: 0;
+            top: 0;
+            width: auto;
+            height: auto;
+            overflow: auto;
+            margin: 1rem;
+            padding: 1rem;
+            font-size: 1.2rem;
+            z-index: 999;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <a class="skip-main" href="#content">Salta al contenuto principale</a>
+        <a class="skip-main" href="#footer">Salta al footer</a>
+    </div>
+
+    <h1>Titolo</h1>
+
+    <nav>
+        <a href="#normal">link menu</a><br>
+        <a href="#normal">link menu</a><br>
+    </nav>
+    <main id="content">
+        <p>Paragrafo normale nel main</p>
+        <a href="#normal">Link normale</a>
+    </main>
+    <footer id="footer">
+        <p>Questo è il footer</p>
+        <a href="#normal">Questo è un link nel footer</a>
+    </footer>
+
+</body>
+
+</html>

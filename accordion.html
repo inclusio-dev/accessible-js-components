@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esempio accordion</title>
+    <style>
+        details {
+            padding: 1rem;
+            outline: 1px solid;
+            width: 25%;
+            border: 1px solid #000;
+            cursor: pointer;
+        }
+
+        label {
+            padding: 1rem;
+        }
+
+        input {
+            margin: 1rem;
+        }
+
+        summary {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        summary::after {
+
+            display: flex;
+            content: 'ᐳ';
+            transition: 0.2s;
+        }
+
+        details[open] summary::after {
+            transform: rotate(90deg);
+        }
+    </style>
+
+</head>
+
+<body>
+    <details onclick="handleClick(event)">
+        <summary>Informazioni personali</summary>
+        <label for="name">Nome:</label>
+        <input type="text" id="name">
+    </details>
+    <details onclick="handleClick(event)">
+        <summary>Dati Fatturazione</summary>
+        <label for="name">Nome:</label>
+        <input type="text" id="nameF">
+    </details>
+    <details onclick="handleClick(event)">
+        <summary>Dati spedizione</summary>
+        <label for="address">Indirizzo:</label>
+        <input type="text" id="address">
+    </details>
+    <script>
+        function handleClick(event) {
+            event.target.open = event.target.open ? false : true
+        }
+    </script>
+</body>
+
+</html>

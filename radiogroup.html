@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .form-control:focus-within {
+            color: var(#e4005b);
+        }
+
+        label {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem;
+        }
+
+        input[type="radio"] {
+            /* Add if not using autoprefixer */
+            -webkit-appearance: none;
+            /* Remove most all native input styles */
+            appearance: none;
+            /* For iOS < 15 */
+            background-color: #fff;
+            /* Not removed via appearance */
+            margin: 0;
+
+            font: inherit;
+            color: currentColor;
+            width: 1.15em;
+            height: 1.15em;
+            border: 0.15em solid currentColor;
+            border-radius: 50%;
+            transform: translateY(-0.075em);
+
+            display: grid;
+            place-content: center;
+        }
+
+        input[type="radio"]::before {
+            content: "";
+            width: 0.65em;
+            height: 0.65em;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em #e4005b;
+        }
+
+        input[type="radio"]:checked::before {
+            transform: scale(1);
+        }
+
+        input[type="radio"]:focus {
+            outline: max(2px, 0.15em) solid currentColor;
+            outline-offset: max(2px, 0.15em);
+        }
+    </style>
+</head>
+
+<body>
+    <form action="">
+        <label class="form-control">
+            <input type="radio" name="radio" />
+            Radio
+        </label>
+
+        <label class="form-control">
+            <input type="radio" name="radio" checked />
+            Radio - checked
+        </label>
+    </form>
+
+
+
+    <div class="dea-checkbox dea-checkbox--circle search-app__radio-buttons-element-checkbox"><input
+            id="radio-grade-all" type="radio" name="radio-grade" value=""> <label for="radio-grade-all"
+            class="dea-checkbox__label-wrapper"><span class="dea-checkbox__label">Tutti i gradi</span></label></div>
+</body>
+
+</html>

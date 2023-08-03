@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esempio Switch</title>
+    <style>
+        .switch {
+            cursor: pointer;
+        }
+
+        button.switch {
+            border: 0;
+            padding: 0;
+            background-color: transparent;
+            font: inherit;
+        }
+
+        .switch__input {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .switch__display {
+            --offset: 0.25em;
+            --diameter: 1.8em;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-around;
+            box-sizing: content-box;
+            width: calc(var(--diameter) * 2 + var(--offset) * 2);
+            height: calc(var(--diameter) + var(--offset) * 2);
+            border: 0.1em solid rgb(0 0 0 / 0.2);
+            position: relative;
+            border-radius: 100vw;
+            background-color: #FAFAFA;
+            transition: 250ms;
+        }
+
+        .switch__display::before {
+            content: "";
+            z-index: 2;
+            position: absolute;
+            top: 50%;
+            left: var(--offset);
+            box-sizing: border-box;
+            width: var(--diameter);
+            height: var(--diameter);
+            border: 0.1em solid rgb(0 0 0 / 0.2);
+            border-radius: 50%;
+            background-color: white;
+            transform: translate(0, -50%);
+            will-change: transform;
+            transition: inherit;
+        }
+
+
+        .switch:focus .switch__display,
+        .switch__input:focus+.switch__display {
+
+            outline: 1px auto -webkit-focus-ring-color;
+            outline-offset: 2px;
+        }
+
+        .switch[aria-checked="true"] .switch__display,
+        .switch__input:checked+.switch__display {
+            background-color: #FAFAFA;
+        }
+
+        .switch[aria-checked="true"] .switch__display::before,
+        .switch__input:checked+.switch__display::before {
+            transform: translate(100%, -50%);
+        }
+
+        .switch__icon {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            color: inherit;
+            fill: currentcolor;
+            vertical-align: middle;
+            overflow: hidden;
+        }
+
+        .switch__icon--cross {
+            color: #CC3A2A;
+            font-size: 85%;
+        }
+
+        .switch__icon--checkmark {
+            color: #267B58;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="buttonSwitch" class='switch' type="button" role="switch" onclick="handleClick(event)">
+        <span class="switch__display" hidden>
+            <svg width='18' height='14' viewBox='0 0 18 14' fill='none' xmlns='http://www.w3.org/2000/svg'
+                aria-hidden="true" focusable="false" class="switch__icon switch__icon--checkmark">
+                <path
+                    d='M6.08471 10.6237L2.29164 6.83059L1 8.11313L6.08471 13.1978L17 2.28255L15.7175 1L6.08471 10.6237Z'
+                    fill='currentcolor' stroke='currentcolor' />
+            </svg>
+            <svg width='13' height='13' viewBox='0 0 13 13' fill='none' xmlns='http://www.w3.org/2000/svg'
+                aria-hidden="true" focusable="false" class="switch__icon switch__icon--cross">
+                <path
+                    d='M11.167 0L6.5 4.667L1.833 0L0 1.833L4.667 6.5L0 11.167L1.833 13L6.5 8.333L11.167 13L13 11.167L8.333 6.5L13 1.833L11.167 0Z'
+                    fill='currentcolor' />
+            </svg>
+        </span>
+
+    </button>
+    <label for="buttonSwitch"> Ricevi notifiche</label>
+
+    <script>
+        function handleClick(event) {
+            let button = document.getElementById("buttonSwitch")
+            if (button.getAttribute('aria-checked') === 'true') {
+                button.removeAttribute('aria-checked')
+            } else {
+                button.setAttribute('aria-checked', 'true')
+            }
+        }
+
+    </script>
+</body>
+
+</html>

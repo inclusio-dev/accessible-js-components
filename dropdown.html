@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        
+.list-none{
+    list-style-type: none;
+    padding: 0;
+}
+
+.hidden {
+    display: none;
+}
+    </style>
+</head>
+
+<body>
+    <h1 class="text-xl font-bold m-4">Dropdown menu</h1>
+    <div class="dropdown m-4">
+        <button class="dropdown-button" onclick="openMenu(event)" aria-expanded="false">
+            Menu ▼
+        </button>
+        <ul class="list-none hidden dropdown-list" role="menubar">
+            <li>
+                <h4>geografia</h4>
+            </li>
+            <li class="mb-2" role="menuitem">
+                <a href="#" target="_blank">Elemento 1</a>
+            </li>
+            <li class="mb-2" role="menuitem">
+                <a href="#" target="_blank">Elemento 2</a>
+            </li>
+            <li class="mb-2" role="menuitem">
+                <a href="#" target="_blank">Elemento 3</a>
+            </li>
+            <li class="mb-2" role="menuitem">
+                <a href="#" target="_blank">Elemento 4</a>
+            </li>
+            <li class="mb-2" role="menuitem">
+                <a href="#" target="_blank">Elemento 5</a>
+            </li>
+            <li class="mb-2" role="menuitem">
+                <a href="#" target="_blank">Elemento 6</a>
+            </li>
+        </ul>
+    </div>
+    <script>
+        const openMenu = (event) => {
+            const dropdownButton = event.target
+
+            if (!dropdownButton || !dropdownButton.classList.contains('dropdown-button'))
+                return console.log('No dropdown button')
+
+            const dropdownContainer = dropdownButton.closest('.dropdown')
+
+            if (!dropdownContainer || !dropdownContainer.classList.contains('dropdown'))
+                return console.log('No dropdown container')
+
+            const dropdownList = dropdownContainer.querySelector('.dropdown-list')
+
+            if (!dropdownList || !dropdownList.classList.contains('dropdown-list'))
+                return console.log('No dropdown list')
+
+            dropdownButton.innerText = dropdownButton.innerText.replaceAll(' ▲', '').replaceAll(' ▼', '')
+
+            if (dropdownList.classList.contains('hidden')) {
+                dropdownButton.innerText = dropdownButton.innerText + " ▲"
+                dropdownList.classList.remove('hidden')
+                dropdownButton.setAttribute("aria-expanded", true)
+                //dropdownList.children[0].children[0].focus()
+            }
+            else {
+                dropdownButton.innerText = dropdownButton.innerText + " ▼"
+                dropdownList.classList.add('hidden')
+                dropdownButton.setAttribute("aria-expanded", true)
+            }
+
+        }
+    </script>
+</body>
+
+</html>

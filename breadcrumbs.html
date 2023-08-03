@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esempio breadcrumbs</title>
+    <style>
+        nav.breadcrumb {
+            padding: 0.8em 1em;
+            border-radius: 4px;
+        }
+
+        nav.breadcrumb ol {
+            margin: 0;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        nav.breadcrumb li {
+            display: inline;
+        }
+
+        nav.breadcrumb li a {
+            color: #000;
+            text-decoration: underline;
+            text-decoration-color: #3edeff;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+        }
+
+        nav.breadcrumb li+li::before {
+            display: inline-block;
+            margin: 0 0.5em;
+            transform: rotate(20deg);
+            border-right: 1px solid currentcolor;
+            height: 0.8em;
+            content: "";
+        }
+
+        nav.breadcrumb [aria-current="page"] {
+            color: #000;
+            font-weight: 700;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+        <ol>
+            <li>
+                <a href="#">
+                    Secondaria di secondo grado
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    Inglese
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    Inglese narrativa
+                </a>
+            </li>
+            <li>
+                <a href="#" aria-current="page">
+                    1984
+                </a>
+            </li>
+        </ol>
+    </nav>
+</body>
+
+</html>
