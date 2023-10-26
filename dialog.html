@@ -61,7 +61,7 @@
         <div tabIndex="0"></div>
         <div id="modalContainer" style="display:none;">
             <div class="overlay"></div>
-            <div id="modal" role="dialog" aria-labelledby="modalTitle" aria-modal="true" class="modal">
+            <dialog id="modal" aria-labelledby="modalTitle"  class="modal">
                 <h2 id="modalTitle">Inserisci informazioni</h2>
                 <form>
                     <div class="inputItem">
@@ -78,7 +78,7 @@
                     </div>
                 </form>
                 <button onClick="toggleModal()">Chiudi Modale</button>
-            </div>
+            </dialog>
         </div>
         <div tabIndex="0"></div>
     </div>
@@ -128,10 +128,13 @@
 
         const toggleModal = ((e) => {
             const modal = document.getElementById("modalContainer");
+            const dialog = document.getElementById("modal")
             if (modal.style.display === "none") {
+                dialog.open = true
                 modal.style.display = "block";
                 trapped = trapFocus(modal);
             } else {
+                dialog.open = false
                 modal.style.display = "none";
                 trapped.onClose();
             }
