@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="in">
+<html lang="it">
 
 <head>
     <meta charset="UTF-8">
@@ -72,6 +72,11 @@
         .checkboxes2 input[type="checkbox"]:checked::before {
             transform: scale(1);
         }
+
+
+        .row{
+            display: flex;
+        }
     </style>
 </head>
 
@@ -85,11 +90,11 @@
         <li>
             <label><input type="checkbox">M. Twain</label>
         </li>
-        <li>
-            <label><input type="checkbox">J. Verne</label>
+        <li class="row">
+            <input type="checkbox" id="verne"><label for="verne">J. Verne</label>
         </li>
-        <li>
-            <label><input type="checkbox">W. Shakespeare</label>
+        <li class="row">
+            <input type="checkbox" id="shakespeare"><label for="shakespeare">W. Shakespeare</label>
         </li>
     </ul>
 

@@ -56,22 +56,26 @@
             outline: max(2px, 0.15em) solid currentColor;
             outline-offset: max(2px, 0.15em);
         }
+
+        .row{
+            display: flex;
+            align-items: center
+        }
     </style>
 </head>
 
 <body>
     <form action="">
-        <label class="form-control">
+        <label>
             <input type="radio" name="radio" />
             Radio
         </label>
 
-        <label class="form-control">
-            <input type="radio" name="radio" checked />
-            Radio - checked
-        </label>
+        <div class="row">
+            <input type="radio" name="radio" id="radiochecked" checked />
+            <label for="radiochecked">Radio - checked</label>
+        </div>
     </form>
-
 
 </body>
 

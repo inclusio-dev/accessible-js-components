@@ -11,6 +11,7 @@
         }
         .show{
             display: flex;
+            flex-direction: column;
         }
         .group{
             display: flex;
@@ -24,6 +25,10 @@
             padding: 0.2rem 0.95rem;
             border-radius: 0.2rem;
         }
+        /* #optionContainer{
+            display: flex;
+            flex-direction: column;
+        } */
     </style>
 </head>
 
@@ -46,24 +51,24 @@
         aria-label="List of options">
         <div>
             <div id="optionContainer" class="hide">
-                <!-- <div role="option" tabindex="-1" aria-selected="false" value="%all%">
+                <!-- <div role="option" aria-selected="false" value="%all%">
                     <span color="denim-blue">
                         Deselect all
                     </span>
                 </div>
-                <div role="option" tabindex="-1" id="option-1" aria-selected="false" value="Option 0">
+                <div role="option" id="option-1" aria-selected="false" value="Option 0">
                     <label><input type="checkbox" aria-checked="false">Option 0</label>
                 </div>
-                <div role="option" tabindex="-1" id="option-2" aria-selected="true" value="Option 1">
+                <div role="option" id="option-2" aria-selected="true" value="Option 1">
                     <label><input type="checkbox" aria-checked="true" checked>Option 1</label>
                 </div>
-                <div role="option" tabindex="-1" id="option-3" aria-selected="false" value="Option 2">
+                <div role="option" id="option-3" aria-selected="false" value="Option 2">
                     <label><input type="checkbox" aria-checked="false">Option 2</label>
                 </div>
-                <div role="option" tabindex="-1" id="option-4" aria-selected="true" value="Option 3">
+                <div role="option" id="option-4" aria-selected="true" value="Option 3">
                     <label><input type="checkbox" aria-checked="true" checked>Option 3</label>
                 </div>
-                <div role="option" tabindex="-1" id="option-5" aria-selected="false" value="Option 4">
+                <div role="option" id="option-5" aria-selected="false" value="Option 4">
                     <label><input type="checkbox" aria-checked="false">Option 4</label>
                 </div> -->
             </div>
@@ -126,13 +131,14 @@
             })
             newDiv.appendChild(newLabel)
             newDiv.setAttribute("role", "option")
-            newDiv.setAttribute("tabindex", "-1")
+            /* newDiv.setAttribute("tabindex", "-1") */
             newDiv.setAttribute("aria-selected", option.checked)
             newDiv.setAttribute("id", option.id)
             newDiv.setAttribute("value", option.label)
             position.appendChild(newDiv)
 
         });
+
         function updateSelectButton(){
             let listSelected = document.getElementById("listSelected")
             listSelected.textContent = ""

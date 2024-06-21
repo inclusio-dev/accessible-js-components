@@ -1,149 +1,193 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>On top</title>
+    <title>Accessible "On Top" Button</title>
     <style>
-        main {
-            border: 1px solid blue;
-            padding: 0 1rem;
-            position: relative;
+        body{
+            font-size: 1.2rem;
         }
 
-        button {
-            background: white;
-            border: 1px solid black;
-            border-radius: 6px;
-            bottom: 1rem;
-            font-size: 1.25rem;
-            font-weight: 700;
-            padding: 1rem;
-
-            right: 1rem;
+        .ontop-btn {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
             cursor: pointer;
+            z-index: 1000;
         }
 
-        #fixed {
-            position: fixed;
-        }
-
-        footer, section, header, nav, aside{
-            border: 1px solid green;
+        .ontop-btn:focus {
+            outline: 3px solid orange;
         }
     </style>
 </head>
 
 <body>
+    <div class="content" id="main" tabindex="-1">
+        <h1>Scroll Down to See the Button</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tempus, magna a sodales porttitor, turpis
+            ante fringilla est, nec sodales ipsum turpis sed nisi. Orci varius natoque penatibus et magnis dis
+            parturient montes, nascetur ridiculus mus. Nulla vestibulum quam tellus, sed ullamcorper lacus viverra eu.
+            Morbi faucibus eu orci nec molestie. Ut vel dictum lacus. Vivamus vitae dignissim arcu, a maximus eros. Ut
+            maximus tortor vel mauris egestas, a auctor risus efficitur. Fusce congue, massa ac pellentesque aliquam,
+            odio elit aliquet ipsum, sed sagittis ante justo sit amet purus. Nunc id aliquet neque. Curabitur consequat
+            tellus eu lorem pretium lacinia. Donec eleifend ante in posuere sollicitudin. Fusce finibus, augue vitae
+            rutrum imperdiet, metus felis sodales tellus, sit amet interdum tortor lectus in nulla. Proin neque lacus,
+            aliquam non finibus et, eleifend id dolor. Nulla convallis rhoncus dolor, eget aliquam diam auctor ac.
 
-    <nav aria-label="Primo nav">sono un nav</nav>
-    <nav aria-label="Secondo nav">sono un nav</nav>
-    <aside>sono in un aside</aside>
-    <header>sono l'header</header>
+            Vestibulum sed eros sit amet eros sodales tincidunt quis sollicitudin odio. Curabitur in condimentum neque,
+            vitae maximus mauris. Duis quis suscipit arcu, tristique commodo diam. Proin non vulputate lorem. Orci
+            varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce ipsum diam, maximus
+            vel lacus eu, aliquet rhoncus justo. Donec justo dolor, commodo sed molestie sed, hendrerit a sem. Nullam
+            luctus mattis luctus. In eu tincidunt massa. Vestibulum ut semper est. Donec vitae fermentum libero.
+            Phasellus fermentum ultricies nisi at condimentum. Integer mollis faucibus turpis. Maecenas a venenatis
+            turpis, vitae congue sapien.
 
-    <main aria-labelledby="heading-one">
-        <a href="#">secondo link</a>
-        <h1 id="heading-one">Titolo 1</h1>
-        <a href="#">Primo link</a>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat porro omnis adipisci quae ab eos dolore
-            fugit earum assumenda numquam minus cupiditate accusamus quasi est eveniet, nostrum beatae quod sint.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nobis cum tenetur officiis molestiae id
-            exercitationem, minus dignissimos quas quos corporis fugiat amet eligendi harum pariatur a rerum consequatur
-            earum.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat porro omnis adipisci quae ab eos dolore
-            fugit earum assumenda numquam minus cupiditate accusamus quasi est eveniet, nostrum beatae quod sint.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nobis cum tenetur officiis molestiae id
-            exercitationem, minus dignissimos quas quos corporis fugiat amet eligendi harum pariatur a rerum consequatur
-            earum.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat porro omnis adipisci quae ab eos dolore
-            fugit earum assumenda numquam minus cupiditate accusamus quasi est eveniet, nostrum beatae quod sint.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nobis cum tenetur officiis molestiae id
-            exercitationem, minus dignissimos quas quos corporis fugiat amet eligendi harum pariatur a rerum consequatur
-            earum.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat porro omnis adipisci quae ab eos dolore
-            fugit earum assumenda numquam minus cupiditate accusamus quasi est eveniet, nostrum beatae quod sint.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nobis cum tenetur officiis molestiae id
-            exercitationem, minus dignissimos quas quos corporis fugiat amet eligendi harum pariatur a rerum consequatur
-            earum.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat porro omnis adipisci quae ab eos dolore
-            fugit earum assumenda numquam minus cupiditate accusamus quasi est eveniet, nostrum beatae quod sint.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nobis cum tenetur officiis molestiae id
-            exercitationem, minus dignissimos quas quos corporis fugiat amet eligendi harum pariatur a rerum consequatur
-            earum.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat porro omnis adipisci quae ab eos dolore
-            fugit earum assumenda numquam minus cupiditate accusamus quasi est eveniet, nostrum beatae quod sint.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nobis cum tenetur officiis molestiae id
-            exercitationem, minus dignissimos quas quos corporis fugiat amet eligendi harum pariatur a rerum consequatur
-            earum.</p>
-        <button type="button">Back to top</button>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat porro omnis adipisci quae ab eos dolore
-            fugit earum assumenda numquam minus cupiditate accusamus quasi est eveniet, nostrum beatae quod sint.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nobis cum tenetur officiis molestiae id
-            exercitationem, minus dignissimos quas quos corporis fugiat amet eligendi harum pariatur a rerum consequatur
-            earum.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat porro omnis adipisci quae ab eos dolore
-            fugit earum assumenda numquam minus cupiditate accusamus quasi est eveniet, nostrum beatae quod sint.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nobis cum tenetur officiis molestiae id
-            exercitationem, minus dignissimos quas quos corporis fugiat amet eligendi harum pariatur a rerum consequatur
-            earum.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat porro omnis adipisci quae ab eos dolore
-            fugit earum assumenda numquam minus cupiditate accusamus quasi est eveniet, nostrum beatae quod sint.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nobis cum tenetur officiis molestiae id
-            exercitationem, minus dignissimos quas quos corporis fugiat amet eligendi harum pariatur a rerum consequatur
-            earum.</p>
-        <button type="button">Back to top</button>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat porro omnis adipisci quae ab eos dolore
-            fugit earum assumenda numquam minus cupiditate accusamus quasi est eveniet, nostrum beatae quod sint.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nobis cum tenetur officiis molestiae id
-            exercitationem, minus dignissimos quas quos corporis fugiat amet eligendi harum pariatur a rerum consequatur
-            earum.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat porro omnis adipisci quae ab eos dolore
-            fugit earum assumenda numquam minus cupiditate accusamus quasi est eveniet, nostrum beatae quod sint.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nobis cum tenetur officiis molestiae id
-            exercitationem, minus dignissimos quas quos corporis fugiat amet eligendi harum pariatur a rerum consequatur
-            earum.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat porro omnis adipisci quae ab eos dolore
-            fugit earum assumenda numquam minus cupiditate accusamus quasi est eveniet, nostrum beatae quod sint.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nobis cum tenetur officiis molestiae id
-            exercitationem, minus dignissimos quas quos corporis fugiat amet eligendi harum pariatur a rerum consequatur
-            earum.</p>
-    </main>
-    
-    <footer>
-        <section>sono in una section</section>
-        <section>sono in una section</section>
-    </footer>
-    <button type="button" id="fixed">Back to top</button>
+            Proin volutpat dapibus lacus, et rutrum magna varius eu. Pellentesque consectetur tempus ornare. Vestibulum
+            aliquam, metus eget porta varius, nulla augue dapibus neque, id accumsan est diam ut nulla. Maecenas eget
+            leo ut dolor gravida imperdiet. Sed egestas porta lectus blandit mollis. Vestibulum vel mi mollis, tincidunt
+            orci eget, ultrices dolor. Vestibulum posuere eleifend tempor. Ut at imperdiet turpis. Donec congue libero
+            sed leo cursus, at faucibus leo accumsan. Morbi vehicula, eros a faucibus porttitor, magna ligula laoreet
+            justo, a lobortis ante turpis quis purus. Pellentesque habitant morbi tristique senectus et netus et
+            malesuada fames ac turpis egestas.
+
+            Quisque ac commodo massa. Nunc aliquet erat augue, vel hendrerit augue pellentesque ut. Sed in placerat
+            ipsum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed leo augue,
+            elementum nec viverra ac, dapibus a sem. Maecenas iaculis dignissim nisl, a mattis justo interdum eget.
+            Suspendisse malesuada, tortor id finibus varius, ex elit maximus tellus, quis condimentum enim risus vitae
+            nulla. Nunc augue dui, scelerisque facilisis eros vitae, rhoncus auctor tortor. Donec facilisis malesuada
+            orci, at pellentesque velit elementum ac. Nullam non odio sed nunc vulputate gravida et id risus. Donec
+            posuere volutpat risus, quis vulputate nibh.
+
+            Nullam sed faucibus arcu. Phasellus convallis nisi ligula, consectetur imperdiet mauris semper quis. Sed vel
+            diam lacus. Morbi ex nibh, dapibus a tincidunt quis, laoreet id ipsum. Nulla convallis condimentum placerat.
+            Maecenas iaculis, neque consectetur fermentum aliquam, enim nisi tempus tortor, sed cursus urna diam id
+            ante. Morbi euismod purus eros, a placerat est dignissim sit amet. Fusce tincidunt elit ipsum, nec varius
+            mauris suscipit ornare. Fusce tempus tortor lobortis, dignissim odio in, egestas turpis. Donec dictum
+            scelerisque bibendum. Pellentesque nec convallis nunc. Orci varius natoque penatibus et magnis dis
+            parturient montes, nascetur ridiculus mus.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tempus, magna a sodales porttitor, turpis
+            ante fringilla est, nec sodales ipsum turpis sed nisi. Orci varius natoque penatibus et magnis dis
+            parturient montes, nascetur ridiculus mus. Nulla vestibulum quam tellus, sed ullamcorper lacus viverra eu.
+            Morbi faucibus eu orci nec molestie. Ut vel dictum lacus. Vivamus vitae dignissim arcu, a maximus eros. Ut
+            maximus tortor vel mauris egestas, a auctor risus efficitur. Fusce congue, massa ac pellentesque aliquam,
+            odio elit aliquet ipsum, sed sagittis ante justo sit amet purus. Nunc id aliquet neque. Curabitur consequat
+            tellus eu lorem pretium lacinia. Donec eleifend ante in posuere sollicitudin. Fusce finibus, augue vitae
+            rutrum imperdiet, metus felis sodales tellus, sit amet interdum tortor lectus in nulla. Proin neque lacus,
+            aliquam non finibus et, eleifend id dolor. Nulla convallis rhoncus dolor, eget aliquam diam auctor ac.
+
+            Vestibulum sed eros sit amet eros sodales tincidunt quis sollicitudin odio. Curabitur in condimentum neque,
+            vitae maximus mauris. Duis quis suscipit arcu, tristique commodo diam. Proin non vulputate lorem. Orci
+            varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce ipsum diam, maximus
+            vel lacus eu, aliquet rhoncus justo. Donec justo dolor, commodo sed molestie sed, hendrerit a sem. Nullam
+            luctus mattis luctus. In eu tincidunt massa. Vestibulum ut semper est. Donec vitae fermentum libero.
+            Phasellus fermentum ultricies nisi at condimentum. Integer mollis faucibus turpis. Maecenas a venenatis
+            turpis, vitae congue sapien.
+
+            Proin volutpat dapibus lacus, et rutrum magna varius eu. Pellentesque consectetur tempus ornare. Vestibulum
+            aliquam, metus eget porta varius, nulla augue dapibus neque, id accumsan est diam ut nulla. Maecenas eget
+            leo ut dolor gravida imperdiet. Sed egestas porta lectus blandit mollis. Vestibulum vel mi mollis, tincidunt
+            orci eget, ultrices dolor. Vestibulum posuere eleifend tempor. Ut at imperdiet turpis. Donec congue libero
+            sed leo cursus, at faucibus leo accumsan. Morbi vehicula, eros a faucibus porttitor, magna ligula laoreet
+            justo, a lobortis ante turpis quis purus. Pellentesque habitant morbi tristique senectus et netus et
+            malesuada fames ac turpis egestas.
+
+            Quisque ac commodo massa. Nunc aliquet erat augue, vel hendrerit augue pellentesque ut. Sed in placerat
+            ipsum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed leo augue,
+            elementum nec viverra ac, dapibus a sem. Maecenas iaculis dignissim nisl, a mattis justo interdum eget.
+            Suspendisse malesuada, tortor id finibus varius, ex elit maximus tellus, quis condimentum enim risus vitae
+            nulla. Nunc augue dui, scelerisque facilisis eros vitae, rhoncus auctor tortor. Donec facilisis malesuada
+            orci, at pellentesque velit elementum ac. Nullam non odio sed nunc vulputate gravida et id risus. Donec
+            posuere volutpat risus, quis vulputate nibh.
+
+            Nullam sed faucibus arcu. Phasellus convallis nisi ligula, consectetur imperdiet mauris semper quis. Sed vel
+            diam lacus. Morbi ex nibh, dapibus a tincidunt quis, laoreet id ipsum. Nulla convallis condimentum placerat.
+            Maecenas iaculis, neque consectetur fermentum aliquam, enim nisi tempus tortor, sed cursus urna diam id
+            ante. Morbi euismod purus eros, a placerat est dignissim sit amet. Fusce tincidunt elit ipsum, nec varius
+            mauris suscipit ornare. Fusce tempus tortor lobortis, dignissim odio in, egestas turpis. Donec dictum
+            scelerisque bibendum. Pellentesque nec convallis nunc. Orci varius natoque penatibus et magnis dis
+            parturient montes, nascetur ridiculus mus.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tempus, magna a sodales porttitor, turpis
+            ante fringilla est, nec sodales ipsum turpis sed nisi. Orci varius natoque penatibus et magnis dis
+            parturient montes, nascetur ridiculus mus. Nulla vestibulum quam tellus, sed ullamcorper lacus viverra eu.
+            Morbi faucibus eu orci nec molestie. Ut vel dictum lacus. Vivamus vitae dignissim arcu, a maximus eros. Ut
+            maximus tortor vel mauris egestas, a auctor risus efficitur. Fusce congue, massa ac pellentesque aliquam,
+            odio elit aliquet ipsum, sed sagittis ante justo sit amet purus. Nunc id aliquet neque. Curabitur consequat
+            tellus eu lorem pretium lacinia. Donec eleifend ante in posuere sollicitudin. Fusce finibus, augue vitae
+            rutrum imperdiet, metus felis sodales tellus, sit amet interdum tortor lectus in nulla. Proin neque lacus,
+            aliquam non finibus et, eleifend id dolor. Nulla convallis rhoncus dolor, eget aliquam diam auctor ac.
+
+            Vestibulum sed eros sit amet eros sodales tincidunt quis sollicitudin odio. Curabitur in condimentum neque,
+            vitae maximus mauris. Duis quis suscipit arcu, tristique commodo diam. Proin non vulputate lorem. Orci
+            varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce ipsum diam, maximus
+            vel lacus eu, aliquet rhoncus justo. Donec justo dolor, commodo sed molestie sed, hendrerit a sem. Nullam
+            luctus mattis luctus. In eu tincidunt massa. Vestibulum ut semper est. Donec vitae fermentum libero.
+            Phasellus fermentum ultricies nisi at condimentum. Integer mollis faucibus turpis. Maecenas a venenatis
+            turpis, vitae congue sapien.
+
+            Proin volutpat dapibus lacus, et rutrum magna varius eu. Pellentesque consectetur tempus ornare. Vestibulum
+            aliquam, metus eget porta varius, nulla augue dapibus neque, id accumsan est diam ut nulla. Maecenas eget
+            leo ut dolor gravida imperdiet. Sed egestas porta lectus blandit mollis. Vestibulum vel mi mollis, tincidunt
+            orci eget, ultrices dolor. Vestibulum posuere eleifend tempor. Ut at imperdiet turpis. Donec congue libero
+            sed leo cursus, at faucibus leo accumsan. Morbi vehicula, eros a faucibus porttitor, magna ligula laoreet
+            justo, a lobortis ante turpis quis purus. Pellentesque habitant morbi tristique senectus et netus et
+            malesuada fames ac turpis egestas.
+
+            Quisque ac commodo massa. Nunc aliquet erat augue, vel hendrerit augue pellentesque ut. Sed in placerat
+            ipsum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed leo augue,
+            elementum nec viverra ac, dapibus a sem. Maecenas iaculis dignissim nisl, a mattis justo interdum eget.
+            Suspendisse malesuada, tortor id finibus varius, ex elit maximus tellus, quis condimentum enim risus vitae
+            nulla. Nunc augue dui, scelerisque facilisis eros vitae, rhoncus auctor tortor. Donec facilisis malesuada
+            orci, at pellentesque velit elementum ac. Nullam non odio sed nunc vulputate gravida et id risus. Donec
+            posuere volutpat risus, quis vulputate nibh.
+
+            Nullam sed faucibus arcu. Phasellus convallis nisi ligula, consectetur imperdiet mauris semper quis. Sed vel
+            diam lacus. Morbi ex nibh, dapibus a tincidunt quis, laoreet id ipsum. Nulla convallis condimentum placerat.
+            Maecenas iaculis, neque consectetur fermentum aliquam, enim nisi tempus tortor, sed cursus urna diam id
+            ante. Morbi euismod purus eros, a placerat est dignissim sit amet. Fusce tincidunt elit ipsum, nec varius
+            mauris suscipit ornare. Fusce tempus tortor lobortis, dignissim odio in, egestas turpis. Donec dictum
+            scelerisque bibendum. Pellentesque nec convallis nunc. Orci varius natoque penatibus et magnis dis
+            parturient montes, nascetur ridiculus mus.</p>
+    </div>
+
+    <button class="ontop-btn" aria-label="Scroll to top of the page">Top</button>
+
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const onTopBtn = document.querySelector('.ontop-btn');
+            const mainContent = document.getElementById('main');
 
-        let handleBackToTop = (elem, container) => {
-            let buttons = document.querySelectorAll("button");
-            let target = document.querySelector("main");
-
-            buttons.forEach(button => {
-                button.addEventListener('click', e => {
-                    target.setAttribute('tabindex', '-1');
-                    target.focus();
-                    window.scrollTo(0, 0);
+            onTopBtn.addEventListener('click', function () {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
                 });
-            })
 
-     
-
-        }
-
-        let handleCleanup = (elem) => {
-            let cleanupTarget = document.querySelector("main");
-
-            cleanupTarget.addEventListener('blur', e => {
-                cleanupTarget.removeAttribute('tabindex');
+                // Sposta il focus all'elemento con ID "main" dopo lo scrolling
+                setTimeout(() => {
+                    mainContent.focus();
+                }, 500); // Timeout per assicurarsi che lo scrolling sia completato
             });
-        }
 
-        window.addEventListener('DOMContentLoaded', e => {
-            handleBackToTop();
-            handleCleanup();
+            onTopBtn.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+
+                    // Sposta il focus all'elemento con ID "main" dopo lo scrolling
+                    setTimeout(() => {
+                        mainContent.focus();
+                    }, 500); // Timeout per assicurarsi che lo scrolling sia completato
+                    e.preventDefault();
+                }
+            });
         });
     </script>
 </body>

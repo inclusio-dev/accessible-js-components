@@ -30,12 +30,14 @@
         summary::after {
 
             display: flex;
-            content: 'ᐳ';
+            content: '+';
             transition: 0.2s;
         }
 
         details[open] summary::after {
-            transform: rotate(90deg);
+            content: '-';
+            transition: 0.2s;
+            transform: rotate(180deg);
         }
     </style>
 

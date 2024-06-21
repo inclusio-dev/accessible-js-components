@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+     .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-list {
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 0;
+  border: 1px solid #ddd;
+  padding: 0;
+  margin: 0;
+  background: white;
+  list-style: none;
+  padding: 10px;
+  display: none; /* Nascondi inizialmente la lista */
+  width: 200px;
+}
+
+.dropdown-list li {
+  margin-bottom: 5px;
+}
+
+/* Visibilità quando il dropdown è attivo */
+.dropdown-list[aria-expanded="true"] {
+  display: block;
+}
+.hidden{
+  display: none;
+}
+.show{
+  display: block;
+}
+    </style>
+</head>
+<body>
+
+  <select>
+    <option>uno</option>
+    <option>due</option>
+    <option>tre</option>
+  </select>
+
+  <div class="dropdown">
+    <button id="dropdownButton" aria-haspopup="listbox" aria-expanded="false">
+      Seleziona Opzioni
+    </button>
+    <ul id="dropdownList" class="dropdown-list hidden" role="listbox" aria-labelledby="dropdownButton">
+      <li role="option">
+        <input type="checkbox" id="option1" name="option" aria-labelledby="labelOption1">
+        <label for="option1" id="labelOption1">Opzione 1</label>
+      </li>
+      <li role="option">
+        <input type="checkbox" id="option2" name="option" aria-labelledby="labelOption2">
+        <label for="option2" id="labelOption2">Opzione 2</label>
+      </li>
+      <li role="option">
+        <input type="checkbox" id="option3" name="option" aria-labelledby="labelOption3">
+        <label for="option3" id="labelOption3">Opzione 3</label>
+      </li>
+    </ul>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  const dropdownButton = document.getElementById('dropdownButton');
+  const dropdownList = document.getElementById('dropdownList');
+
+  dropdownButton.addEventListener('click', function() {
+    const expanded = this.getAttribute('aria-expanded') === 'true' || false;
+    this.setAttribute('aria-expanded', !expanded);
+    if(expanded){
+      dropdownList.classList.remove("hidden")
+    dropdownList.classList.add("show")
+    }else{
+      dropdownList.classList.remove("show")
+      dropdownList.classList.add("hidden")
+    }
+    
+  });
+
+  // Gestisci click al di fuori del dropdown per chiuderlo
+  document.addEventListener('click', function(e) {
+    if (!dropdown.contains(e.target)) {
+      dropdownList.classList.remove("show")
+      dropdownList.classList.add("hidden")
+      dropdownButton.setAttribute('aria-expanded', 'false');
+    }
+  });
+});
+  </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .show{
+            visibility: visible;
+        }
+        .hide{
+            visibility:hidden;
+        }
+        #buttonCombobox{
+            border: 1px solid black;
+        }
+        .selected{
+            background-color: red;
+        }
+        li{
+            list-style-type: none; 
+        }
+        #buttonCombobox:hover, li:hover{
+            cursor: pointer;
+        }
+        #buttonCombobox, #listOption{
+            width: fit-content;
+        }
+    </style>
+</head>
+<body>
+    <select>
+        <option>seleziona una option</option>
+        <option>uno</option>
+        <option>due</option>
+        <option>tre</option>
+    </select>
+
+
+    <div role="combobox" aria-haspopup="menu" aria-expanded="false" id="buttonCombobox" aria-controls="listOption" aria-activedescendant="listOption">seleziona una option</div>
+    <ul role="menu" id="listOption" class="hide" tab-index="-1" aria-labelledby="option1" aria-activedescendant="option1">
+        <li role="menuitem" aria-selected="false" id="option0">
+            seleziona una option
+        </li>
+        <li role="menuitem" aria-selected="false" id="option1">
+            <input type="checkbox" id="checkOption1" value="option1">
+            <!-- <label for="checkOption1">opzione uno</label> -->
+            opzione uno
+        </li>
+        <li role="menuitem" aria-selected="false" id="option2">
+            <input type="checkbox" id="checkOption2" value="option2">
+            <!-- <label for="checkOption2">opzione due</label> -->
+            opzione due
+        </li>
+
+    </ul>
+    
+
+    <script>
+
+    const options = [
+        {
+            id: "option1",
+            label: "Opzione uno",
+            value: "opt-1"
+        },
+        {
+            id: "option2",
+            label: "Opzione due",
+            value: "opt-2"
+        }
+    ];
+
+    options.forEach(option => {
+        // creo element li
+        // crei elemento input type checkbox
+        // crei elemento label
+        // spari nel dom 
+    })
+
+    let buttonCombobox = document.getElementById("buttonCombobox")
+    let listOption = document.getElementById("listOption")
+        
+    buttonCombobox.addEventListener("click", () =>{
+        
+        if(buttonCombobox.ariaExpanded == "true"){
+            console.log("aria-expanded=true -> false")
+            buttonCombobox.ariaExpanded = false
+            listOption.classList.remove("show")
+            listOption.classList.add("hide")
+        }else if(buttonCombobox.ariaExpanded == "false"){
+            console.log("aria-expanded=false -> true")
+            buttonCombobox.ariaExpanded = true
+            listOption.classList.remove("hide")
+            listOption.classList.add("show")
+        }
+            
+    })
+
+    let option1= document.getElementById("option1")
+    /* let spuntaoption1 = document.getElementById("spuntaoption1") */
+    let checkOption1 = document.getElementById("checkOption1")
+    let option2= document.getElementById("option2")
+    /* let spuntaoption2 = document.getElementById("spuntaoption2") */
+    let checkOption2 = document.getElementById("checkOption2")
+/*     let option3= document.getElementById("option3") */
+
+    option1.addEventListener("click", ()=>{
+        console.log("clicco option1")
+        if(option1.ariaSelected=="true"){
+            console.log("aria-selected=true -> false")
+            option1.ariaSelected = "false"
+            checkOption1.checked = null
+            option1.classList.remove("selected")
+            /* spuntaoption1.classList.remove("show")
+            spuntaoption1.classList.add("hide") */
+        }else if(option1.ariaSelected=="false"){
+            console.log("aria-selected=false -> true")
+            option1.ariaSelected = "true"
+            checkOption1.checked = "true"
+            option1.classList.add("selected")
+
+        }
+    })
+    option2.addEventListener("click", ()=>{
+        console.log("clicco option2")
+        if(option2.ariaSelected=="true"){
+            console.log("aria-selected=true -> false")
+            option2.ariaSelected = "false"
+            checkOption2.checked = null
+            option2.classList.remove("selected")
+        }else if(option2.ariaSelected=="false"){
+            console.log("aria-selected=false -> true")
+            option2.ariaSelected = "true"
+            checkOption2.checked = "true"
+            option2.classList.add("selected")
+        }
+    })
+
+    document.body.addEventListener('keydown', function(e) {
+        if (e.key == "Escape") {
+            buttonCombobox.ariaExpanded = false
+            listOption.classList.remove("show")
+            listOption.classList.add("hide")
+        }
+    });
+
+    </script>
+</body>
+</html>

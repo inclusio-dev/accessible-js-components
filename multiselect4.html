@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown Accessibile con Checkbox</title>
+    <style>
+        .show {
+            display: block;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        #buttonCombobox {
+            border: 1px solid black;
+            padding: 5px 10px;
+            background-color: #f0f0f0;
+            margin-bottom: 5px;
+        }
+
+        .selected {
+            background-color: #c8e6c9;
+        }
+
+        li {
+            list-style-type: none;
+            padding: 5px 0;
+        }
+
+        #buttonCombobox:hover,
+        li:hover {
+            cursor: pointer;
+            background-color: #ddd;
+        }
+
+        #listOption {
+            margin-top: 0px;
+            width: fit-content;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            position: absolute;
+            background-color: white;
+            /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); */
+        }
+    </style>
+</head>
+
+<body>
+    <select>
+        <option>uno</option>
+        <option>due</option>
+        <option>tre</option>
+    </select>
+    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, quo quis error, aperiam tempore rem nihil doloribus cum provident sapiente recusandae. Minus exercitationem fugiat iusto, esse mollitia aperiam corrupti vel.</div>
+    <div role="combobox" aria-haspopup="listbox" aria-expanded="false" id="buttonCombobox" aria-controls="listOption"
+        tabindex="0" aria-activedescendant="listOption">Seleziona una opzione</div>
+    <ul role="menu" id="listOption" class="hide" aria-labelledby="buttonCombobox">
+        <!-- Le opzioni verranno generate dinamicamente -->
+    </ul>
+    <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed ad laborum officia maiores, eum explicabo, nemo in tempore pariatur soluta natus facilis inventore, sit animi ut numquam obcaecati molestiae vel.</div>
+<input type="checkbox">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const buttonCombobox = document.getElementById("buttonCombobox");
+            const listOption = document.getElementById("listOption");
+            const options = [
+                { id: "option1", label: "Opzione uno", value: "opt-1", checked: false},
+                { id: "option2", label: "Opzione due", value: "opt-2", checked: false },
+                { id: "option3", label: "Opzione tre", value: "opt-3", checked: false},
+                { id: "option4", label: "Opzione quattro", value: "opt-4", checked: false },
+                { id: "option5", label: "Opzione cinque", value: "opt-5", checked: false},
+                { id: "option6", label: "Opzione sei", value: "opt-6", checked: false }
+            ];
+
+            options.forEach(option => {
+                const li = document.createElement('li');
+                li.setAttribute('role', 'option');
+                li.setAttribute('aria-selected', 'false');
+                li.id = option.id;
+                li.tabIndex = 0; // Rende l'elemento focusabile
+
+                const input = document.createElement('input');
+                input.type = 'checkbox';
+                input.id = `check${option.id}`;
+                input.value = option.value;
+               
+                input.onmousedown = function (event) {
+                    // Toggle checkstate logic
+                    event.preventDefault(); // this would stop mousedown from continuing and would not focus
+                }
+
+                const label = document.createElement('label');
+                label.setAttribute('for', input.id);
+                label.textContent = option.label;
+
+                li.appendChild(input);
+                li.appendChild(label);
+                listOption.appendChild(li);
+
+                // Evento click per selezionare/deselezionare l'opzione
+                li.addEventListener('click', function (event) {
+                    console.log("click")
+                    event.stopPropagation(); // Impedisce la propagazione per evitare la chiusura immediata
+                    toggleCheckbox(input, li);
+                });
+
+                
+
+                // Gestione dei tasti Invio e Barra spaziatrice
+                li.addEventListener('keydown', function (event) {
+                    console.log("keydown")
+                    // Ignora l'evento se i tasti Ctrl o Alt sono premuti
+                    if((event.key === ' ' && event.ctrlKey && event.altKey)){
+                        event.preventDefault(); // Evita lo scrolling della pagina per la barra spaziatrice
+                        toggleCheckbox(input, li);
+                    }else if (event.key === 'Enter' || event.key === ' ' ) {
+                        event.preventDefault(); // Evita lo scrolling della pagina per la barra spaziatrice
+                        toggleCheckbox(input, li);
+                    }
+                });
+                
+            });
+
+            buttonCombobox.addEventListener("click", () => {
+                toggleMenu()
+            });
+
+            function toggleMenu(){
+                const isExpanded = buttonCombobox.getAttribute('aria-expanded') === 'true';
+                buttonCombobox.setAttribute('aria-expanded', String(!isExpanded));
+                buttonCombobox.setAttribute('aria-checked', String(!isExpanded));
+
+                listOption.classList.toggle("show", !isExpanded);
+                listOption.classList.toggle("hide", isExpanded);
+            }
+
+            // Evento pressione freccia giù
+            buttonCombobox.addEventListener('keydown', function (event) {
+                if(event.key == "ArrowDown"){
+                    console.log("freccia giù")
+                    
+                    event.stopPropagation(); // Impedisce la propagazione per evitare la chiusura immediata
+                    console.log(buttonCombobox.ariaExpanded)
+                    if(buttonCombobox.ariaExpanded == "false")
+                        toggleMenu()
+                }
+                   
+                });
+
+            document.addEventListener('click', function (e) {
+                if (!buttonCombobox.contains(e.target) && !listOption.contains(e.target)) {
+                    buttonCombobox.setAttribute('aria-expanded', 'false');
+                    buttonCombobox.setAttribute('aria-checked', 'false');
+                    listOption.classList.add("hide");
+                    listOption.classList.remove("show");
+                }
+            });
+            document.body.addEventListener('keydown', function (e) {
+                if (e.key === "Escape") {
+                    buttonCombobox.setAttribute('aria-expanded', 'false');
+                    buttonCombobox.setAttribute('aria-checked', 'false');
+                    listOption.classList.add("hide");
+                    listOption.classList.remove("show");
+                }
+            });
+        });
+
+        // Funzione per commutare lo stato del checkbox e dell'elemento li
+        function toggleCheckbox(checkbox, liElement) {
+            const isChecked = checkbox.checked;
+            checkbox.checked = !isChecked;
+            liElement.setAttribute('aria-selected', String(!isChecked));
+            liElement.classList.toggle('selected', !isChecked);
+        }
+    </script>
+</body>
+
+</html>
