@@ -21,11 +21,17 @@
 
 <body>
     <h1 class="text-xl font-bold m-4">Dropdown menu</h1>
+
+    
+    <a href="#">Chi siamo</a>
+    <button></button>
+
+
     <div class="dropdown m-4">
-        <button class="dropdown-button" onclick="openMenu(event)" aria-expanded="false">
+        <button class="dropdown-button" onclick="openMenu(event)" aria-expanded="false" aria-controls="ul1">
             Menu ▼
         </button>
-        <ul class="list-none hidden dropdown-list" role="menubar">
+        <ul class="list-none hidden dropdown-list" role="menu" id="ul1"> <!-- role="menubar" -> menù orizzontale , role="menu" -> menù verticale -->
             <li>
                 <h4>esempio di titolo</h4>
             </li>

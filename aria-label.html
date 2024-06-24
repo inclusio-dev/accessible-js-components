@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aria-label</title>
+</head>
+<body>
+    
+    <div>sono un altro div</div>
+    <div aria-label="sono un div">corpo del div</div>
+    <button aria-label="sono un pulsante">corpo del pulsante</button>
+    <!-- 
+        semantica = button
+        etichetta / accessible name = corpo del pulsante ? sono un pulsante
+    -->
+
+    <span aria-labelledby="ilmioid">sono uno span</span>
+    <span id="ilmioid" aria-hidden="true">sono l'etichetta dello span</span>
+
+</body>
+</html>
