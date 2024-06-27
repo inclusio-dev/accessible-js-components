@@ -4,135 +4,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esempio dialog</title>
+    <title>Esempio modale</title>
     <style>
-        .overlay {
-            position: fixed;
-            background: grey;
-            opacity: 0.7;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            top: 0;
-        }
-
         form {
-            margin-bottom: 2rem;
-        }
-
-        .modal {
-            position: absolute;
-            z-index: 2;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            height: 80vh;
-            width: 50vw;
-            background-color: #fff;
-            border-radius: 4px;
-            padding: 1em;
-            overflow: auto;
-        }
-
-        .inputItem {
-            margin-bottom: 16px;
-        }
-
-        .label,
-        .input {
             display: flex;
-            width: 100%;
+            flex-direction: column;
+            gap: 1rem;
         }
 
-        .label {
-            margin-bottom: 4px;
+        dialog{
+            border: 0;
         }
 
+        .close {
+            margin-top: 1rem;
+            right: 0;
+        }
     </style>
 </head>
 
 <body>
-    <div>
-        <h1>Trap Focus Function Example</h1>
-        <button onclick="toggleModal()">Apri modale</button>
-        <div tabIndex="0"></div>
-        <div id="modalContainer" style="display:none;">
-            <div class="overlay"></div>
-            <div id="modal" role="dialog" aria-labelledby="modalTitle" aria-modal="true" class="modal">
-                <h2 id="modalTitle">Inserisci informazioni</h2>
-                <form>
-                    <div class="inputItem">
-                        <label for="name" class="label">
-                            Nome
-                        </label>
-                        <input id="name" type="text" placeholder="Name" class="input" />
-                    </div>
-                    <div class="input-item">
-                        <label htmlFor="surname" class="label">
-                            Cognome
-                        </label>
-                        <input id="surname" type="text" placeholder="Surname" class="input" />
-                    </div>
-                </form>
-                <button onClick="toggleModal()">Chiudi Modale</button>
+    <a href="#">link</a>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi commodi, rerum nulla facilis a recusandae, quibusdam autem, ullam porro itaque eaque temporibus perferendis! Autem tempore consequuntur illum quasi perferendis sequi.</p>
+    <dialog id="myDialog" class="right">
+        <h2 id="modalTitle">Inserisci informazioni</h2>
+        <form>
+            <div class="inputItem">
+                <label for="name" class="label">
+                    Nome
+                </label>
+                <!-- add autofocus for move focus on this input when dialog will be open -->
+                <input id="name" type="text" placeholder="Mario" class="input" />
             </div>
-        </div>
-        <div tabIndex="0"></div>
-    </div>
+            <div class="input-item">
+                <label htmlFor="surname" class="label">
+                    Cognome
+                </label>
+                <input id="surname" type="text" placeholder="Rossi" class="input" />
+            </div>
+        </form>
+        <button class="close" type="reset">Chiudi Modale</button>
+    </dialog>
+
+    <button class="open-dialog">Apri modale</button>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, at obcaecati, perferendis libero vero soluta quo quibusdam inventore exercitationem ad quas accusamus, itaque ut. Tempora officia illum voluptatibus commodi dolorem?</p>
+    <a href="#">link</a>
     <script>
-        const trapFocus = (element, prevFocusableElement = document.activeElement) => {
-            const focusableEls = Array.from(
-                element.querySelectorAll(
-                    'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])'
-                )
-            );
-            const firstFocusableEl = focusableEls[0];
-            const lastFocusableEl = focusableEls[focusableEls.length - 1];
-            let currentFocus = null;
 
-            firstFocusableEl.focus();
-            currentFocus = firstFocusableEl;
+        const dialog = document.querySelector("#myDialog");
 
-            const handleFocus = e => {
-                e.preventDefault();
-                // if the focused element "lives" in your modal container then just focus it
-                if (focusableEls.includes(e.target)) {
-                    currentFocus = e.target;
-                } else {
-                    // you're out of the container
-                    // if previously the focused element was the first element then focus the last 
-                    // element - means you were using the shift key
-                    if (currentFocus === firstFocusableEl) {
-                        lastFocusableEl.focus();
-                    } else {
-                        // you previously were focused on the last element so just focus the first one
-                        firstFocusableEl.focus();
-                    }
-                    // update the current focus var
-                    currentFocus = document.activeElement;
-                }
-            };
+        dialog.addEventListener("cancel", (event) => {
+            console.log("dialog chiusa")
+        });
 
-            document.addEventListener("focus", handleFocus, true);
+        const openDialog = document.querySelector(".open-dialog");
+        openDialog.addEventListener("click", () => {
+            dialog.showModal();
+        });
 
-            return {
-                onClose: () => {
-                    document.removeEventListener("focus", handleFocus, true);
-                    prevFocusableElement.focus();
-                }
-            };
-        };
+        const closeButton = document.querySelector(".close");
+        closeButton.addEventListener("click", () => {
+            dialog.close();
+        });
 
-        const toggleModal = ((e) => {
-            const modal = document.getElementById("modalContainer");
-            if (modal.style.display === "none") {
-                modal.style.display = "block";
-                trapped = trapFocus(modal);
-            } else {
-                modal.style.display = "none";
-                trapped.onClose();
-            }
-        })
+        let customStyle = "hola"
+
+        switch (dialog.classList[0]) {
+            case "center": break;
+            case "right": customStyle = "margin: 0 0 0 auto; height: 100%;"; break;
+            case "left": customStyle = "margin: 0 auto 0 0; height: 100vh;";  break;
+        }
+
+        dialog.style = customStyle
+
     </script>
 </body>
 
