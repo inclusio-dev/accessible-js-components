@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esempi sconti</title>
+</head>
+
+<body>
+    <p>esempio 1</p>
+    <div class="Price_container__fiyVU product-price"><span class="Price_price__1WqIj">€90</span><span
+            class="Price_originalPrice__Xus5f">€150</span><span class="Price_discount__SrWNx">–40%</span></div>
+
+    <br>
+
+    <p>esempio 2</p>
+    <div>
+        <span>€90</span>
+        <span>€150</span>
+        <span>–40% (U+2013 meno non matematico, se raggruppato viene letto correttamente)</span>
+    </div>
+
+    <br>
+    <p>esempio 3</p>
+    <span>€90</span>
+    <span>€150</span>
+    <span>–40% (meno non matematico)</span>
+    
+    <br>
+
+    <p>esempio 4 - unico corretto</p>
+    <div>
+        <span aria-label="prezzo scontato">€28</span>
+        <span aria-label="prezzo originale">€48</span>
+        <span aria-label="percentuale di sconto">− 30% (U+2212)</span>
+        <span aria-label="percentuale di sconto">&minus; 30%</span>
+    </div>
+</body>
+
+</html>
