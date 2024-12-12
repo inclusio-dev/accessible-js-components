@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .errormessage, [aria-invalid="false"] ~ .errormessage {
+        visibility: hidden;
+        }
+
+        [aria-invalid="true"] {
+        outline: 2px solid red;
+        }
+
+        [aria-invalid="true"] ~ .errormessage {
+        visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <form id="formDati">
+        <fieldset>
+            <legend>Dati personali</legend>
+            <div>
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" aria-required="true" >
+                <span id="errNome" class="errormessage">Errore: nome non selezionato</span>
+            </div>
+            <div>
+                <label for="cognome">Cognome</label>
+                <input type="text" id="cognome" aria-required="true">
+                <span id="errCognome" class="errormessage">Errore: cognome non selezionato</span>
+            </div>
+            <div>
+                <label for="selectPaese">Paese</label>
+                <select aria-required="true" id="selectPaese" aria-errormessage="errPaese">
+                    <option value="italia">italia</option>
+                    <option value="spagna">spagna</option>
+                    <option value="francia">francia</option>
+                </select>
+                <span id="errPaese" class="errormessage">Errore: paese non selezionato</span>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Dati rihiesta</legend>
+            <div>
+                <label for="selectRichiesta">Tipo richiesta</label>
+                <select multiple="multiple" aria-required="true" id="selectRichiesta">
+                    <option value=""></option>
+                    <option value="info">info</option>
+                    <option value="prodotti">prodotti</option>
+                    <option value="spedizione">spedizione</option>
+                </select>
+                <span id="errRichiesta" class="errormessage">Errore: richiesta non selezionato</span>
+            </div>
+        </fieldset>
+        <button type="submit" id="submitForm">Invia form</button>
+    </form>
+
+    <script>
+        let formDati=document.getElementById("formDati")
+        let selectPaese=document.getElementById("selectPaese");
+        let selezionato = false
+
+        addEventListener("change", (event) => {
+            selezionato = true
+        })
+
+        addEventListener("submit", (event) => {
+            event.preventDefault();
+            // 
+            if(selezionato === false){
+                // metto a true aria-invalid perché non ho selezionato una option nella select
+                selectPaese.setAttribute("aria-invalid", "true")
+                console.log("ho settato ariainvalid")
+            }else{
+                // quando è false vuol dire che aria-invalid è a false e l'errore devo nasconderlo
+                console.log("ho selezionato qualcosa")
+                selectPaese.setAttribute("aria-invalid", "false")
+                let errPaese = document.getElementById("errPaese")
+       
+            }
+            
+        });
+    </script>
+</body>
+</html>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Esempio Salta al contenuto</title>
     <style>
-        a.skip-main {
+        a.skip-main, .sr-only {
             left: -999px;
             position: absolute;
             top: auto;
@@ -30,6 +30,12 @@
             font-size: 1.2rem;
             z-index: 999;
         }
+
+        .hide{
+            display: none;
+        }
+
+        /* aggiungere la grafica quando l'elemento perde il focus*/
     </style>
 </head>
 
@@ -37,6 +43,8 @@
     <div>
         <a class="skip-main" href="#content">Salta al contenuto principale</a>
         <a class="skip-main" href="#footer">Salta al footer</a>
+        <span class="sr-only">testo nascosto alla vista</span>
+        <span class="hide">testo nascosto alla vista e al dom</span>
     </div>
 
     <h1>Titolo</h1>
