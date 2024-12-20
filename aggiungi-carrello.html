@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>carrello</title>
+    <style>
+        .order-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.product-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.quantity-price-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-btn {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.quantity-btn:hover {
+    background: #f5f5f5;
+}
+
+input[type="number"] {
+    width: 60px;
+    height: 44px;
+    text-align: center;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.product-price {
+    min-width: 60px;
+    text-align: right;
+    font-weight: bold;
+}
+
+.order-total {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid #333;
+    text-align: right;
+    font-size: 1.2em;
+}
+
+/* .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+} */
+
+/* Stili per focus visibile */
+.quantity-btn:focus,
+input[type="number"]:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}
+    </style>
+</head>
+
+<body>
+    <div class="order-container">
+        <!-- Primo Prodotto -->
+        <div class="product-row" role="group" aria-label="Selettore quantità prodotto 1">
+            <span class="product-name">Prodotto 1</span>
+            <div class="quantity-price-group">
+                <button 
+                    type="button"
+                    aria-label="Diminuisci quantità prodotto 1"
+                    class="quantity-btn decrease"
+                    onclick="diminuisci(1)">
+                    -
+                </button>
+                
+                <input 
+                    type="number" 
+                    id="numeroProdotti1"
+                    name="numeroProdotti1"
+                    min="1" 
+                    max="99" 
+                    value="1"
+                    aria-label="Quantità prodotto 1"
+                    aria-valuemin="1"
+                    aria-valuemax="99"
+                    aria-valuenow="1"
+                    data-price="10" />
+                    
+                <button 
+                    type="button"
+                    aria-label="Aumenta quantità prodotto 1" 
+                    class="quantity-btn increase"
+                    onclick="aumenta(1)">
+                    +
+                </button>
+                
+                <span class="product-price" id="prezzo1">10€</span>
+            </div>
+        </div>
+    
+        <!-- Secondo Prodotto -->
+        <div class="product-row" role="group" aria-label="Selettore quantità prodotto 2">
+            <span class="product-name">Prodotto 2</span>
+            <div class="quantity-price-group">
+                <button 
+                    type="button"
+                    aria-label="Diminuisci quantità prodotto 2"
+                    class="quantity-btn decrease"
+                    onclick="diminuisci(2)">
+                    -
+                </button>
+                
+                <input 
+                    type="number" 
+                    id="numeroProdotti2"
+                    name="numeroProdotti2"
+                    min="1" 
+                    max="99" 
+                    value="1"
+                    aria-label="Quantità prodotto 2"
+                    aria-valuemin="1"
+                    aria-valuemax="99"
+                    aria-valuenow="1"
+                    data-price="10" />
+                    
+                <button 
+                    type="button"
+                    aria-label="Aumenta quantità prodotto 2" 
+                    class="quantity-btn increase"
+                    onclick="aumenta(2)">
+                    +
+                </button>
+                
+                <span class="product-price" id="prezzo2">10€</span>
+            </div>
+        </div>
+    
+        <!-- Totale Ordine -->
+        <div class="order-total" role="region" aria-label="Totale ordine">
+            <strong>Totale: </strong>
+            <span id="totalePrezzi">20€</span>
+        </div>
+    </div>
+
+    <script>
+        function aumenta(productId) {
+    const input = document.getElementById(`numeroProdotti${productId}`);
+    const currentValue = parseInt(input.value);
+    const pricePerUnit = parseFloat(input.dataset.price);
+    
+    if (currentValue < 99) {
+        const newValue = currentValue + 1;
+        input.value = newValue;
+        input.setAttribute('aria-valuenow', newValue);
+        
+        // Aggiorna il prezzo del prodotto
+        updateProductPrice(productId, newValue, pricePerUnit);
+        
+        
+        // Feedback per screen reader
+        announceChange(`Quantità prodotto ${productId} aumentata a ${newValue}`);
+
+        setTimeout(() => {
+            // Aggiorna il totale
+            updateTotal();
+        }, 2500);
+    } else {
+        announceChange('Raggiunto il valore massimo di 99');
+    }
+}
+
+function diminuisci(productId) {
+    const input = document.getElementById(`numeroProdotti${productId}`);
+    const currentValue = parseInt(input.value);
+    const pricePerUnit = parseFloat(input.dataset.price);
+    
+    if (currentValue > 1) {
+        const newValue = currentValue - 1;
+        input.value = newValue;
+        input.setAttribute('aria-valuenow', newValue);
+        
+        // Aggiorna il prezzo del prodotto
+        updateProductPrice(productId, newValue, pricePerUnit);
+        
+        announceChange(`Quantità prodotto ${productId} diminuita a ${newValue}`);
+        
+        // Feedback per screen reader
+        setTimeout(() => {
+            // Aggiorna il totale
+            updateTotal();
+        }, 2500);
+        
+    } else {
+        announceChange('Raggiunto il valore minimo di 1');
+    }
+}
+
+function updateProductPrice(productId, quantity, pricePerUnit) {
+    const prezzoElement = document.getElementById(`prezzo${productId}`);
+    const totalPrice = quantity * pricePerUnit;
+    prezzoElement.textContent = `${totalPrice}€`;
+}
+
+// Le altre funzioni rimangono invariate, aggiorniamo solo updateTotal e announceChange
+
+function updateTotal() {
+    const inputs = document.querySelectorAll('input[type="number"]');
+    let total = 0;
+    
+    // Raccogliamo anche un riepilogo delle quantità per l'annuncio
+    let productSummary = '';
+    
+    inputs.forEach((input, index) => {
+        const quantity = parseInt(input.value);
+        const pricePerUnit = parseFloat(input.dataset.price);
+        const productTotal = quantity * pricePerUnit;
+        total += productTotal;
+        
+        // Aggiungiamo al riepilogo
+        productSummary += `Prodotto ${index + 1}: ${quantity} pezzi per ${productTotal}€. `;
+    });
+    
+    const totaleElement = document.getElementById('totalePrezzi');
+    totaleElement.textContent = `${total}€`;
+    
+    // Creiamo un messaggio completo per lo screen reader ${productSummary}
+    const announcement = ` Totale ordine aggiornato: ${total} euro`;
+    announceChange(announcement);
+}
+
+function announceChange(message) {
+    // Rimuoviamo eventuali annunci precedenti per evitare sovrapposizioni
+    const existingAnnouncer = document.querySelector('.sr-announcer');
+    if (existingAnnouncer) {
+        document.body.removeChild(existingAnnouncer);
+    }
+    
+    const announcer = document.createElement('div');
+    announcer.setAttribute('role', 'alert');
+    announcer.classList.add('sr-only', 'sr-announcer');
+    document.body.appendChild(announcer);
+    
+    // Piccolo delay per assicurarci che lo screen reader colga il cambiamento
+    setTimeout(() => {
+        announcer.textContent = message;
+    }, 50);
+    
+    // Rimuoviamo l'announcer dopo un tempo più lungo per assicurarci 
+    // che il messaggio venga letto completamente
+    setTimeout(() => {
+        if (announcer.parentElement) {
+            document.body.removeChild(announcer);
+        }
+    }, 2500); // Aumentato a 3 secondi per messaggi più lunghi
+}
+
+/* function announceChange(message) {
+    const announcer = document.createElement('div');
+    announcer.setAttribute('role', 'alert');
+    announcer.classList.add('sr-only');
+    document.body.appendChild(announcer);
+    announcer.textContent = message;
+    
+    setTimeout(() => {
+        document.body.removeChild(announcer);
+    }, 1000);
+} */
+
+// Gestione tastiera
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('input[type="number"]');
+    
+    inputs.forEach(input => {
+        const productId = input.id.replace('numeroProdotti', '');
+        
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                aumenta(productId);
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                diminuisci(productId);
+            }
+        });
+    });
+});
+    </script>
+
+</body>
+
+</html>
